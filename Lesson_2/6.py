@@ -5,3 +5,28 @@
 число, чем то, что загадано. Если за 10 попыток число не отгадано,
 то вывести загаданное число.
 """
+
+import sys
+import random
+
+num = random.randint(0, 100)
+print(num)
+
+print("Отгадайте число от 0 до 100")
+
+try:
+    for i in range(1, 11):
+        answer = int(input("Ваш ответ: "))
+
+        if answer == num:
+            print(f"Поздравляем! Вы угадали число!")
+            sys.exit()
+        elif answer > num:
+            print(f"Больше. Осталось попыток: {i}")
+        elif answer < num:
+            print(f"Меньше. Осталось попыток: {i}")
+
+    print(f"Игра окончена! Правильный ответ: {num}")
+
+except Exception:
+    print("Ошибка ввода")

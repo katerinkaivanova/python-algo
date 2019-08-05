@@ -9,3 +9,68 @@
 Также сообщать пользователю о невозможности деления на ноль,
 если он ввел 0 в качестве делителя.
 """
+
+import sys
+
+
+def my_add(a, b):
+    return a + b
+
+
+def my_subt(a, b):
+    return a - b
+
+
+def my_mult(a, b):
+    return a * b
+
+
+def my_div(a, b):
+    return a / b
+
+
+start_msg = """
+Добро пожаловать!
+Команды:
++ : сложение
+- : вычитание
+* : умножение
+/ : деление
+0 : выход
+"""
+
+COMMANDS = {
+    '+': my_add,
+    '-': my_subt,
+    '*': my_mult,
+    '/': my_div,
+    '0': quit,
+}
+
+print(start_msg)
+
+
+def calc():
+    while True:
+        try:
+            cmd = input("Введите команду: ").replace(' ', '')
+
+            if COMMANDS.get(cmd):
+                if cmd == '0':
+                    print("Работа программы завершена!")
+                    sys.exit()
+                else:
+                    a, b = map(int, input("Введите два числа через пробел: ").split())
+                    action = COMMANDS[cmd]
+                    print(action(a, b))
+            else:
+                print("Некорректная команда")
+
+        except ZeroDivisionError:
+            print("Ошибка! Деление на 0.")
+
+        except Exception:
+            print("Некорректные данные")
+
+
+calc()
